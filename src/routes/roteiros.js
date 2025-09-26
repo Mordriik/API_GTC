@@ -1,15 +1,32 @@
 const express = require('express');
-const { PrismaClient } = require('@prisma/client');
 const router = express.Router();
-const prisma = new PrismaClient();
+const RoteiroController = require('../controllers/roteiroController');
+const authenticateToken = require('../middleware/authenticateToken');
+const authorizeAdmin = require('../middleware/authorizeAdmin');
 
-router.get('/', async (req, res) => {
-  try {
-    const roteiros = await prisma.roteiros.findMany();
-    res.json(roteiros);
-  } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar roteiros' });
-  }
-});
+// Importa o middleware e o schema de validação
+const validate = require('../middleware/validateMiddleware');
+const { createRoteiroSchema, updateRoteiroSchema } = require('../validators/roteiroValidator');
+
+// Rotas Públicas
+router.get('/', RoteiroController.getAll);
+router.get('/:id', RoteiroController.getById);
+
+// Rotas Protegidas com Validação
+router.post('/', 
+  authenticateToken, 
+  authorizeAdmin, 
+  validate(createRoteiroSchema),
+  RoteiroController.create
+);
+
+router.put('/:id', 
+  authenticateToken, 
+  authorizeAdmin, 
+  validate(updateRoteiroSchema),
+  RoteiroController.update
+);
+
+router.delete('/:id', authenticateToken, authorizeAdmin, RoteiroController.delete);
 
 module.exports = router;

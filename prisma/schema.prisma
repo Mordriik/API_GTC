@@ -2,6 +2,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -56,4 +61,15 @@ model textospopups {
   id         Int    @id @default(autoincrement())
   termo      String @unique
   explicacao String
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@map("users")
 }

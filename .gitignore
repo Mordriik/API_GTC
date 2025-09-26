@@ -3,3 +3,5 @@ node_modules/
 /prisma/generated/
 /.vscode/
 .DS_Store
+/generatedgit
+generated/prisma

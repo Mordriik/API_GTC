@@ -20,7 +20,7 @@ Esta é a API oficial do site do Grupo de Teatro Científico da UEPG (GTC), dese
 
 ```bash
 git clone https://github.com/Mordriik/GTC_API
-cd GTC_API
+cd API
 npm install
 npx prisma generate
 npm run dev
