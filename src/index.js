@@ -15,6 +15,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Rota de verificação de saúde (Health Check)
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'API do GTC está no ar!' });
+});
+
 // Registro das rotas
 app.use('/auth', authRoutes);
 app.use('/roteiros', roteiroRoutes);
