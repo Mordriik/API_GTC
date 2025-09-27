@@ -30,7 +30,7 @@ API oficial do site do Grupo de Teatro Científico da UEPG (GTC). Desenvolvida c
 
 **1. Clone o repositório:**
 ```bash
-git clone [https://github.com/Mordriik/API_GTC.git](https://github.com/Mordriik/API_GTC.git)
+git clone https://github.com/Mordriik/API_GTC.git
 # Navega até a pasta raiz
 cd API_GTC
 ```
